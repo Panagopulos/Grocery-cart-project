@@ -12,6 +12,8 @@ let editFlag = false;
 let editID = '';
 
 form.addEventListener('submit', addItem);
+//clear items
+clearBtn.addEventListener('click', clearItems);
 
 function addItem(e) {
     e.preventDefault();
@@ -35,6 +37,8 @@ function addItem(e) {
                 <i class="fas fa-trash"></i>
               </button>
             </div>`;
+            const deleteBtn = element.querySelector('.delete-btn');
+            const editBtn = element.querySelector('.edit-btn');
             //append child
             list.appendChild(element);
             //display alert
@@ -64,11 +68,27 @@ function displayAlert(text, action) {
         alert.classList.remove(`alert-${action}`);
     },1000)
 }
+//clear items
+function clearItems() {
+    const items = document.querySelectorAll('.grocery-item');
+    if(items.length > 0) {
+        items.forEach((item) => {
+            list.removeChild(item);
+        });
+    }
+    container.classList.remove('show-container');
+    displayAlert('empty list', 'success');
+    setBackToDefault();
+    // localStorage.removeItem('list');
+}
 
 //set back to default
 function setBackToDefault() {
-    console.log('set back to default');
-    
+    grocery.value = '';
+    editFlag = false;
+    editID = '';
+    submitBtn.textContent = 'submit';
+
 }
 
 // ****** LOCAL STORAGE ****** 
