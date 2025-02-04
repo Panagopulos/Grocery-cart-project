@@ -10,3 +10,22 @@ const clearBtn = document.querySelector('.clear-btn');
 let editElement;
 let editFlag = false;
 let editID = '';
+
+form.addEventListener('submit', addItem);
+
+function addItem(e) {
+    e.preventDefault();
+    const value =  grocery.value;
+    const id = new Date().getTime().toString();
+    if(value && !editFlag) {
+        console.log('added item to the list');
+    }
+    else if (value && editFlag) { 
+        console.log('editing');
+     }
+    else {
+        alert.textContent = 'empty value';
+        alert.classList.add('alert-danger');
+    }
+}
+//display alert
